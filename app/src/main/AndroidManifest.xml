@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- اتصال اپ به FastAPI -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- دسترسی به میکروفن برای SpeechRecognizer -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!--
+        Android 11+ package visibility:
+        - Speech Recognition service
+        - CSJBOT Robot SDK package
+    -->
+    <queries>
+
+        <package android:name="com.csjbot.robotsdk.ten" />
+
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+
+    </queries>
+
+    <application
+
+        android:allowBackup="true"
+
+        android:usesCleartextTraffic="true"
+
+        android:label="HTN Robot Assistant"
+
+        android:theme="@style/Theme.HTNRobotAssistant"
+
+        tools:replace="android:theme">
+
+        <!--
+            Mirrors the CSJBOT SDK convention discovered in HandlerMsgService.
+            Our raw Binder bridge currently uses packageName directly too.
+        -->
+        <meta-data
+            android:name="CSJ_SDK_REMOTE_APP_NAME"
+            android:value="com.htnhome.robotassistant" />
+
+        <activity
+
+            android:name=".MainActivity"
+
+            android:exported="true"
+
+            android:screenOrientation="landscape">
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+
+        </activity>
+
+    </application>
+
+</manifest>
